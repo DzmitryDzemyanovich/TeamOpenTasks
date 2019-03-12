@@ -15,6 +15,7 @@ module TestData =
         let allTeams = [team1; team2; adminTeam]
 
     module Users =
+//#region Test Users
         let admin: User = { 
             Id = Guid.NewGuid()
             Name = "Test Admin"
@@ -68,6 +69,7 @@ module TestData =
             Name = "N/A 2"
             TeamsMembership = []
             }
+//#endregion
 
         let allUsers = [admin; sm1; sm2; member11; member12; member21; member22; na1; na2]
 

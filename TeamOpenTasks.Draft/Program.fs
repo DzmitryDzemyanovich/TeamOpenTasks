@@ -27,17 +27,20 @@ module Main =
     
     
     (*
-    Admin can add user
-    Admin can remove user
+    +Admin can add user
+    +Admin can remove user
     Admin can see all teams (with users)
     Admin can see all users (as a list)
-    Admin can create teams
-    Admin can remove teams
-    Admin can assign roles
+    +Admin can create teams
+    +Admin can remove teams
+    +Admin can assign roles
+    +Admin can unassign roles
     Admin can modify team rules (group of teams also)
+    +Admin can change user team-role //(unassign-assign)
+    Admin can edit tasks
 
-    SM can assign user to team
-    SM can remove user from team
+    +SM can assign user to team //(addMembership)
+    +SM can remove user from team //(removeMembership)
     SM can create tasks
     SM can add tasks
     SM can remove tasks
@@ -45,6 +48,8 @@ module Main =
     SM can unassign task from user (option: user should accept)
     SM can see all his teams (with users)
     SM can modify team rules (group of teams also)
+    SM can change user team-role
+    SM can edit tasks
 
     User can assign task to himself
     User can unassign task from himself
