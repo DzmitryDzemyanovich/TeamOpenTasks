@@ -6,13 +6,14 @@ module TestData =
     open Teams
     open Helpers
     open UserRoles
+    open Tasks
 
     module Teams =
         let team1: Team = createTeam "Team 1"
         let team2: Team = createTeam "Team 2"
         let adminTeam: Team = createTeam "Admins"
 
-        let allTeams = [team1; team2; adminTeam]
+        let mutable allTeams = [team1; team2; adminTeam]
 
     module Users =
 //#region Test Users
@@ -71,15 +72,15 @@ module TestData =
             }
 //#endregion
 
-        let allUsers = [admin; sm1; sm2; member11; member12; member21; member22; na1; na2]
+        let mutable allUsers = [admin; sm1; sm2; member11; member12; member21; member22; na1; na2]
 
-        let addUser (u:User) : User list =
+        let addUser (u:User) (us:User list): User list =
             //TODO: add user to DB
-            u::allUsers
+            u::us
 
-        let removeUser (u:User) : User list =
+        let removeUser (u:User) (us:User list): User list =
             //TODO: remove user from DB
-            allUsers |> List.filter (fun x -> x.Id <> u.Id)
+            us |> List.filter (fun x -> x.Id <> u.Id)
 
         let isInRole (t:Team) (r:Role) (u:User) : bool =
             u.TeamsMembership 
@@ -100,9 +101,11 @@ module TestData =
             isAdmin u || isSM t u || isSimpleMember t u
 
         let addTeam (t:Team) (ts:Team list) : Team list =
+            //add to DB
             t::ts
 
         let removeTeam (t:Team) (ts:Team list) : Team list =
+            //removefromDB
             ts |> List.filter (fun x -> x.Id <> t.Id)
 
         let getUserTeamRole (u:User) (t:Team): Role option =
@@ -130,3 +133,25 @@ module TestData =
                 if (isAdmin u) then Teams.allTeams
                 else (Teams.allTeams |> List.filter(fun t -> isSM t u || isSimpleMember t u))
             getUsersPerTeam targetTeams
+
+
+    module Tasks =
+        let allTasks = []
+
+        
+        let addTask (t:Task) (ts: Task list): Task list =
+            //TODO: add task to DB
+            t::ts
+
+        let removeTask (t:Task) (ts: Task list): Task list =
+            //TODO: add task to DB
+            ts |> List.filter (fun task -> task.Id <> t.Id)
+        (*
+            type Task = {
+        Id: Guid
+        Title: string
+        CreationDate: DateTime
+        Description: string
+        IsDone: bool
+        }
+        *)

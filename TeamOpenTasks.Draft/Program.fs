@@ -41,22 +41,27 @@ module Main =
 
     +SM can assign user to team //(addMembership)
     +SM can remove user from team //(removeMembership)
-    SM can create tasks
+    +SM can create tasks
     +SM can add tasks
     +SM can remove tasks
-    SM can assign tasks to user (option: user should accept)
-    SM can unassign task from user (option: user should accept)
+    +SM can assign tasks to user (option: user should accept)
+    +SM can unassign task from user (option: user should accept)
     +SM can see all his teams (with users)
     +SM can modify team rules (group of teams also)
-    SM can change user team-role
-    SM can edit tasks
+    +SM can change user team-role
+    +SM can edit tasks
 
     +User can see his team members
-    User can assign task to himself
-    User can unassign task from himself
+    +User can assign task to himself
+    +User can unassign task from himself
 
-    Task can expire (optional)
-    Task can unassign on expiration (optional)
+    +Task can expire (optional)
+    +Task can unassign on expiration (optional)
+
+    0.add tests
+    1.add project with Api to call this lib
+    2.add db
+    3.add UI
     *)
 
 // type Order (amount:int, price:decimal) =

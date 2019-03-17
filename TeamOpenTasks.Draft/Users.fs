@@ -2,6 +2,7 @@ namespace TeamOpenTasks
 
 open System
 open UserRoles
+open Teams
 
 module Users =
     type TeamMembership = { TeamId: Guid; Role: Role }
@@ -28,3 +29,6 @@ module Users =
     let removeMembership (u:User) (tm:TeamMembership) : User =
         let filteredTM = u.TeamsMembership |> filterMembership tm
         setMembership u filteredTM
+
+    let cleanTeamMembership (u:User) (t:Team) : User =
+        {u with TeamsMembership=(u.TeamsMembership |> List.filter(fun tm -> tm.TeamId <> t.Id))}
