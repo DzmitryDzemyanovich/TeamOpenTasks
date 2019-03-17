@@ -2,6 +2,6 @@ namespace TeamOpenTasks
 
 module UserRoles =
     type Role =
-        | Admin
-        | ScrumMaster
-        | TeamMember
+        | Admin = 1
+        | ScrumMaster = 2
+        | TeamMember = 3

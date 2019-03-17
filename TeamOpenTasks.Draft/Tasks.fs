@@ -7,7 +7,8 @@ module Tasks =
         Id: Guid
         Title: string
         CreationDate: DateTime
-        Description: String
+        Description: string
+        IsDone: bool
         }
 
     type TaskAssignment = {
