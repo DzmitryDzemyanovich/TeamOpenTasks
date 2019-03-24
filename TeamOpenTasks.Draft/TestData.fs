@@ -1,4 +1,5 @@
 namespace TeamOpenTasks
+open System.Collections.Generic
 
 module TestData =
     open System
@@ -14,6 +15,12 @@ module TestData =
         let adminTeam: Team = createTeam "Admins"
 
         let mutable allTeams = [team1; team2; adminTeam]
+
+        let find (id: Guid) : Team option=
+            let result =
+                allTeams 
+                |> List.tryFind (fun t -> t.Id = id)
+            result
 
     module Users =
 //#region Test Users

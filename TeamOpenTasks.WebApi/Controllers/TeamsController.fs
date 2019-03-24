@@ -10,18 +10,20 @@ open TeamOpenTasks.Teams
 
 [<Route("api/[controller]")>]
 [<ApiController>]
-type ValuesController () =
+type TeamsController () =
     inherit ControllerBase()
 
     [<HttpGet>]
     member this.Get() =
-        let values = Teams.allTeams //[|"value1"; "value2"|]
+        let values = Teams.allTeams
         ActionResult<Team[]>(values |> List.toArray)
 
     [<HttpGet("{id}")>]
-    member this.Get(id:int) =
-        let value = "value"
-        ActionResult<string>(value)
+    member this.Get(id: Guid) =
+        let value = Teams.find id
+        match value with
+        | Some team -> OkObjectResult(team) :> ObjectResult
+        | None -> NotFoundObjectResult((*"none"*)) :> ObjectResult
 
     [<HttpPost>]
     member this.Post([<FromBody>] value:string) =
