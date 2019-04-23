@@ -22,7 +22,7 @@ module Teams =
         Tasks = []
     }
 
-    let createTeam t = { globalTeam with Id = Guid.NewGuid(); Title = t }
+    let createTeamWithTitle t = { globalTeam with Id = Guid.NewGuid(); Title = t }
 
     let changeTeamTitle (t:string) (team:Team): Team =
         {team with Title=t}
@@ -30,8 +30,17 @@ module Teams =
     let changeTeamSprintStart (s:DayOfWeek) (team:Team): Team =
         {team with SprintStart=s}
 
+    let changeTeamInitialDate (d:DateTime) (team:Team): Team =
+        {team with SprintZeroStartDate=d}
+
     let changeTeamSprintLength (l:int) (team:Team): Team =
         {team with SprintLength=l}
+
+    let createTeam (title: string) (startDay: DayOfWeek) (startDate: DateTime) (sprintLength: int) : Team =
+        createTeamWithTitle title 
+        |> changeTeamSprintStart startDay
+        |> changeTeamInitialDate startDate
+        |> changeTeamSprintLength sprintLength
 
     let addTeamTask (t:Task) (tm:Team): Team =
         {tm with Tasks=(t::tm.Tasks)}

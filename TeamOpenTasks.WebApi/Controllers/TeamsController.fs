@@ -7,6 +7,8 @@ open System.Threading.Tasks
 open Microsoft.AspNetCore.Mvc
 open TeamOpenTasks.TestData
 open TeamOpenTasks.Teams
+open Microsoft.AspNetCore.Mvc
+open Microsoft.AspNetCore.Mvc
 
 [<Route("api/[controller]")>]
 [<ApiController>]
@@ -26,8 +28,9 @@ type TeamsController () =
         | None -> NotFoundObjectResult((*"none"*)) :> ObjectResult
 
     [<HttpPost>]
-    member this.Post([<FromBody>] value:string) =
-        ()
+    member this.Post([<FromBody>] team:Team ) =
+        let createdTeam = Teams.addTeam team.Title team.SprintStart team.SprintZeroStartDate team.SprintLength
+        OkObjectResult(createdTeam) :> ObjectResult
 
     [<HttpPut("{id}")>]
     member this.Put(id:int, [<FromBody>] value:string ) =

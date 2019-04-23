@@ -10,9 +10,9 @@ module TestData =
     open Tasks
 
     module Teams =
-        let team1: Team = createTeam "Team 1"
-        let team2: Team = createTeam "Team 2"
-        let adminTeam: Team = createTeam "Admins"
+        let team1: Team = createTeamWithTitle "Team 1"
+        let team2: Team = createTeamWithTitle "Team 2"
+        let adminTeam: Team = createTeamWithTitle "Admins"
 
         let mutable allTeams = [team1; team2; adminTeam]
 
@@ -21,6 +21,11 @@ module TestData =
                 allTeams 
                 |> List.tryFind (fun t -> t.Id = id)
             result
+
+        let addTeam  (title: string) (startDay: DayOfWeek) (startDate: DateTime) (sprintLength: int) :Team =
+            let team = Teams.createTeam title startDay startDate sprintLength
+            allTeams <- team::allTeams
+            team
 
     module Users =
 //#region Test Users
