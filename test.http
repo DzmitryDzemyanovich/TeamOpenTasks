@@ -1,0 +1,13 @@
+GET https://localhost:50001/api/teams
+
+##
+
+POST https://localhost:50001/api/teams HTTP/1.1
+content-type: application/json
+
+{
+    "title": "Team 3",
+    "sprintZeroStartDate": "2019-03-08T00:00:00",
+    "sprintStart": 5,
+    "sprintLength": 10
+}

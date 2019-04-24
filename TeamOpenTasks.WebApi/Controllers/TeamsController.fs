@@ -17,8 +17,8 @@ type TeamsController () =
 
     [<HttpGet>]
     member this.Get() =
-        let values = Teams.allTeams
-        ActionResult<Team[]>(values |> List.toArray)
+        let teams = Teams.allTeams
+        ActionResult<Team[]>(teams |> List.toArray)
 
     [<HttpGet("{id}")>]
     member this.Get(id: Guid) =
@@ -28,8 +28,8 @@ type TeamsController () =
         | None -> NotFoundObjectResult((*"none"*)) :> ObjectResult
 
     [<HttpPost>]
-    member this.Post([<FromBody>] team:Team ) =
-        let createdTeam = Teams.addTeam team.Title team.SprintStart team.SprintZeroStartDate team.SprintLength
+    member this.Post([<FromBody>] title:string, sprintZeroStartDate:DateTime, sprintStart:DayOfWeek, sprintLength:int) =
+        let createdTeam = Teams.addTeam title sprintStart sprintZeroStartDate sprintLength
         OkObjectResult(createdTeam) :> ObjectResult
 
     [<HttpPut("{id}")>]
