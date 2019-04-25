@@ -28,8 +28,8 @@ type TeamsController () =
         | None -> NotFoundObjectResult((*"none"*)) :> ObjectResult
 
     [<HttpPost>]
-    member this.Post([<FromBody>] title:string, sprintZeroStartDate:DateTime, sprintStart:DayOfWeek, sprintLength:int) =
-        let createdTeam = Teams.addTeam title sprintStart sprintZeroStartDate sprintLength
+    member this.Post([<FromBody>] team:Team) =
+        let createdTeam = Teams.addTeam team.Title team.SprintStart team.SprintZeroStartDate team.SprintLength
         OkObjectResult(createdTeam) :> ObjectResult
 
     [<HttpPut("{id}")>]
