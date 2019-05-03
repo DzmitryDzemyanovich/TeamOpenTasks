@@ -3,13 +3,14 @@ namespace TeamOpenTasks
 open System
 open UserRoles
 open Teams
+open Types
 
 module Users =
-    type TeamMembership = { TeamId: Guid; Role: Role }
+    type TeamMembership = { TeamId: TeamId; Role: Role }
 
-    type User = { 
-        Id: Guid
-        Name: string
+    type User = {
+        Id: UserId
+        Name: UserName
         TeamsMembership: TeamMembership list
         }
 
@@ -19,7 +20,7 @@ module Users =
     let setMembership (u:User) (tm:TeamMembership list) : User =
         { Name=u.Name; Id=u.Id; TeamsMembership=tm }
 
-    let createUser (n:string) : User =
+    let createUser (n:UserName) : User =
         { Name = n; Id = Guid.NewGuid(); TeamsMembership = [] }
 
     let addMembership (u:User) (tm:TeamMembership) : User =

@@ -1,7 +1,6 @@
 namespace TeamOpenTasks
 
 module Helpers =
-    open System
     open Users
     open Teams
     open UserRoles

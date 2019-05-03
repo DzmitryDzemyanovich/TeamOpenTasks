@@ -1,31 +1,32 @@
 namespace TeamOpenTasks
 
 open System
+open Types
 
 module Tasks =
     type Task = {
-        Id: Guid
-        Title: string
+        Id: TaskId
+        Title: TaskTitle
         CreationDate: DateTime
-        Description: string
+        Description: TaskDescription
         IsDone: bool
         }
 
-    let createTask (t:string) (d:string) : Task =
+    let createTask (t:TaskTitle) (d:TaskDescription) : Task =
         { Id=Guid.NewGuid(); Title=t; CreationDate=DateTime.Now; Description=d; IsDone=false }
 
-    let editTitle (t:string) (task:Task) : Task =
+    let editTitle (t:TaskTitle) (task:Task) : Task =
         { task with Title = t}
 
-    let editDescription (d:string) (task:Task) : Task =
+    let editDescription (d:TaskDescription) (task:Task) : Task =
         { task with Description = d }
 
     let editIsDone (isdone:bool) (task:Task) : Task =
         { task with IsDone = isdone }
 
     type TaskAssignment = {
-        TaskId: Guid
-        UserId: Guid
+        TaskId: TaskId
+        UserId: UserId
         AssignedAt: DateTime
         Expires: DateTime option
         RespawnOnExpiration: bool
@@ -33,7 +34,7 @@ module Tasks =
 
     let mutable allTaskAssignments:TaskAssignment list = []
 
-    let assignTask (tid: Guid) (uid: Guid) (e: DateTime option) (r:bool) : TaskAssignment =
+    let assignTask (tid: TaskId) (uid: UserId) (e: DateTime option) (r:bool) : TaskAssignment =
         { TaskId=tid; UserId=uid; AssignedAt=DateTime.Now; Expires=e; RespawnOnExpiration=r}
 
     let addTaskAssignment (ta:TaskAssignment) : TaskAssignment list =

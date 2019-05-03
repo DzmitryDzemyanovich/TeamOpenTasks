@@ -2,11 +2,12 @@ namespace TeamOpenTasks
 
 open System
 open Tasks
+open Types
 
 module Teams =
     type Team = {
-        Id: Guid
-        Title: string
+        Id: TeamId
+        Title: TeamTitle
         SprintZeroStartDate: DateTime
         SprintStart: DayOfWeek
         SprintLength: int
@@ -24,7 +25,7 @@ module Teams =
 
     let createTeamWithTitle t = { globalTeam with Id = Guid.NewGuid(); Title = t }
 
-    let changeTeamTitle (t:string) (team:Team): Team =
+    let changeTeamTitle (t:TeamTitle) (team:Team): Team =
         {team with Title=t}
 
     let changeTeamSprintStart (s:DayOfWeek) (team:Team): Team =
@@ -36,8 +37,8 @@ module Teams =
     let changeTeamSprintLength (l:int) (team:Team): Team =
         {team with SprintLength=l}
 
-    let createTeam (title: string) (startDay: DayOfWeek) (startDate: DateTime) (sprintLength: int) : Team =
-        createTeamWithTitle title 
+    let createTeam (title: TeamTitle) (startDay: DayOfWeek) (startDate: DateTime) (sprintLength: int) : Team =
+        createTeamWithTitle title
         |> changeTeamSprintStart startDay
         |> changeTeamInitialDate startDate
         |> changeTeamSprintLength sprintLength

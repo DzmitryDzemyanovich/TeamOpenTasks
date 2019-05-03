@@ -8,6 +8,7 @@ module TestData =
     open Helpers
     open UserRoles
     open Tasks
+    open Types
 
     module Teams =
         let team1: Team = createTeamWithTitle "Team 1"
@@ -18,66 +19,66 @@ module TestData =
 
         let find (id: Guid) : Team option=
             let result =
-                allTeams 
+                allTeams
                 |> List.tryFind (fun t -> t.Id = id)
             result
 
-        let addTeam  (title: string) (startDay: DayOfWeek) (startDate: DateTime) (sprintLength: int) :Team =
+        let addTeam  (title: TeamTitle) (startDay: DayOfWeek) (startDate: DateTime) (sprintLength: int) :Team =
             let team = Teams.createTeam title startDay startDate sprintLength
             allTeams <- team::allTeams
             team
 
     module Users =
 //#region Test Users
-        let admin: User = { 
+        let admin: User = {
             Id = Guid.NewGuid()
             Name = "Test Admin"
             TeamsMembership = [createAdmin Teams.adminTeam]
             }
 
-        let sm1: User = { 
+        let sm1: User = {
             Id = Guid.NewGuid()
             Name = "SM team 1"
             TeamsMembership = [createSM Teams.team1]
             }
 
-        let sm2: User = { 
+        let sm2: User = {
             Id = Guid.NewGuid()
             Name = "SM team 2"
             TeamsMembership = [createSM Teams.team2]
             }
 
-        let member11: User = { 
+        let member11: User = {
             Id = Guid.NewGuid()
             Name = "Member 1 team 1"
             TeamsMembership = [createMember Teams.team1]
             }
 
-        let member12: User = { 
+        let member12: User = {
             Id = Guid.NewGuid()
             Name = "Member 2 team 1"
             TeamsMembership = [createMember Teams.team1]
             }
 
-        let member21: User = { 
+        let member21: User = {
             Id = Guid.NewGuid()
             Name = "Member 1 team 2"
             TeamsMembership = [createMember Teams.team2]
             }
 
-        let member22: User = { 
+        let member22: User = {
             Id = Guid.NewGuid()
             Name = "Member 2 team 2"
             TeamsMembership = [createMember Teams.team2]
             }
 
-        let na1: User = { 
+        let na1: User = {
             Id = Guid.NewGuid()
             Name = "N/A 1"
             TeamsMembership = []
             }
 
-        let na2: User = { 
+        let na2: User = {
             Id = Guid.NewGuid()
             Name = "N/A 2"
             TeamsMembership = []
@@ -95,7 +96,7 @@ module TestData =
             us |> List.filter (fun x -> x.Id <> u.Id)
 
         let isInRole (t:Team) (r:Role) (u:User) : bool =
-            u.TeamsMembership 
+            u.TeamsMembership
             |> List.filter (fun tm -> (tm.TeamId=t.Id) && (tm.Role=r))
             |> List.length
             |> (=) 1
@@ -126,21 +127,21 @@ module TestData =
             elif isSimpleMember t u then Some Role.TeamMember
             else None
 
-        let getTeamUsers (t: Team) (users: User list) : (Guid * string * Role) list =
-            users 
+        let getTeamUsers (t: Team) (users: User list) : (UserId * UserName * Role) list =
+            users
             |> List.filter (fun u -> isAnyMember t u) // (fun {TeamsMembership=tm} -> tm |> List.exists (fun membership -> membership.TeamId = t.Id))
             |> List.map (fun u -> (u.Id, u.Name, (getUserTeamRole u t )))
             |> List.filter (fun (_,_,x) -> x.IsSome)
             |> List.map (fun (id, name, x) -> (id, name, x.Value))
 
-        let getUsersPerTeam (teams: Team list) : (Guid * string * (Guid * string * Role) list) list =
+        let getUsersPerTeam (teams: Team list) : (TeamId * TeamTitle * (UserId * UserName * Role) list) list =
             teams |> List.map (fun t -> (t.Id, t.Title, getTeamUsers t allUsers))
 
-            // Teams.allTeams 
-            // |> List.map (fun t -> t.Id) 
+            // Teams.allTeams
+            // |> List.map (fun t -> t.Id)
             // |> List.map (fun teamId -> (teamId, getTeamUsers teamId allUsers))
 
-        let getTeams (u:User) : (Guid * string * (Guid * string * Role) list) list =
+        let getTeams (u:User) : (TeamId * TeamTitle * (UserId * UserName * Role) list) list =
             let targetTeams =
                 if (isAdmin u) then Teams.allTeams
                 else (Teams.allTeams |> List.filter(fun t -> isSM t u || isSimpleMember t u))
@@ -150,7 +151,7 @@ module TestData =
     module Tasks =
         let allTasks = []
 
-        
+
         let addTask (t:Task) (ts: Task list): Task list =
             //TODO: add task to DB
             t::ts

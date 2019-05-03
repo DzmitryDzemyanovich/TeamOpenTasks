@@ -1,8 +1,9 @@
-GET https://localhost:50001/api/teams
+GET https://localhost:5001/api/teams
+GET http://localhost:5000/api/teams
 
 ##
 
-POST https://localhost:50001/api/teams HTTP/1.1
+POST https://localhost:5001/api/teams HTTP/1.1
 content-type: application/json
 
 {
