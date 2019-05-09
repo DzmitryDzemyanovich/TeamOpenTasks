@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TeamOpenTasks.Data\TeamOpenTasks.Data.fsproj" />
     <ProjectReference Include="..\TeamOpenTasks.Draft\TeamOpenTasks.fsproj" />
   </ItemGroup>
 

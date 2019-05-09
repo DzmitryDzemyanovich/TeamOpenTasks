@@ -1,9 +1,9 @@
 namespace TeamOpenTasks
 
+open TeamOpenTasks.Data.Types
+open TeamOpenTasks.Data.Models
+
 module Helpers =
-    open Users
-    open Teams
-    open UserRoles
 
     let createTeamRole (t:Team) (r:Role) : TeamMembership =
         { TeamId = t.Id; Role = r }

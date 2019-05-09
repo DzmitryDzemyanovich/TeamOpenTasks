@@ -1,14 +1,12 @@
 namespace TeamOpenTasks
-open System.Collections.Generic
+
+open TeamOpenTasks.Data.Types
+open TeamOpenTasks.Data.Models
 
 module TestData =
     open System
-    open Users
     open Teams
     open Helpers
-    open UserRoles
-    open Tasks
-    open Types
 
     module Teams =
         let team1: Team = createTeamWithTitle "Team 1"
@@ -17,7 +15,7 @@ module TestData =
 
         let mutable allTeams = [team1; team2; adminTeam]
 
-        let find (id: Guid) : Team option=
+        let tryFind (id: TeamId) : Team option=
             let result =
                 allTeams
                 |> List.tryFind (fun t -> t.Id = id)
@@ -121,7 +119,7 @@ module TestData =
             //removefromDB
             ts |> List.filter (fun x -> x.Id <> t.Id)
 
-        let getUserTeamRole (u:User) (t:Team): Role option =
+        let tryGetUserTeamRole (u:User) (t:Team): Role option =
             if isAdmin u then Some Role.Admin
             elif isSM t u then Some Role.ScrumMaster
             elif isSimpleMember t u then Some Role.TeamMember
@@ -129,17 +127,13 @@ module TestData =
 
         let getTeamUsers (t: Team) (users: User list) : (UserId * UserName * Role) list =
             users
-            |> List.filter (fun u -> isAnyMember t u) // (fun {TeamsMembership=tm} -> tm |> List.exists (fun membership -> membership.TeamId = t.Id))
-            |> List.map (fun u -> (u.Id, u.Name, (getUserTeamRole u t )))
+            |> List.filter (fun u -> isAnyMember t u)
+            |> List.map (fun u -> (u.Id, u.Name, (tryGetUserTeamRole u t )))
             |> List.filter (fun (_,_,x) -> x.IsSome)
             |> List.map (fun (id, name, x) -> (id, name, x.Value))
 
         let getUsersPerTeam (teams: Team list) : (TeamId * TeamTitle * (UserId * UserName * Role) list) list =
             teams |> List.map (fun t -> (t.Id, t.Title, getTeamUsers t allUsers))
-
-            // Teams.allTeams
-            // |> List.map (fun t -> t.Id)
-            // |> List.map (fun teamId -> (teamId, getTeamUsers teamId allUsers))
 
         let getTeams (u:User) : (TeamId * TeamTitle * (UserId * UserName * Role) list) list =
             let targetTeams =
@@ -159,12 +153,3 @@ module TestData =
         let removeTask (t:Task) (ts: Task list): Task list =
             //TODO: add task to DB
             ts |> List.filter (fun task -> task.Id <> t.Id)
-        (*
-            type Task = {
-        Id: Guid
-        Title: string
-        CreationDate: DateTime
-        Description: string
-        IsDone: bool
-        }
-        *)

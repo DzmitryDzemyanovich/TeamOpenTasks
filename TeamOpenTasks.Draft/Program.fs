@@ -17,13 +17,6 @@ module Person =
 *)
 
 module Main =
-    open System
-    open Users
-    open Teams
-    open UserRoles
-    open TestData
-    open Helpers
-
     
     
     (*

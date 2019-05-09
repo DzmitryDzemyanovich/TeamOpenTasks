@@ -1,18 +1,10 @@
 namespace TeamOpenTasks
 
 open System
-open UserRoles
-open Teams
-open Types
+open TeamOpenTasks.Data.Types
+open TeamOpenTasks.Data.Models
 
 module Users =
-    type TeamMembership = { TeamId: TeamId; Role: Role }
-
-    type User = {
-        Id: UserId
-        Name: UserName
-        TeamsMembership: TeamMembership list
-        }
 
     let filterMembership (m:TeamMembership) (ms:TeamMembership list):TeamMembership list =
         ms |> List.filter (fun x -> (x.TeamId <> m.TeamId) && (x.Role <> m.Role))

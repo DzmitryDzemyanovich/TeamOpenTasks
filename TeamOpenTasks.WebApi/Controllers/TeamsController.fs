@@ -1,14 +1,9 @@
 ﻿namespace TeamOpenTasks.WebApi.Controllers
 
 open System
-open System.Collections.Generic
-open System.Linq
-open System.Threading.Tasks
 open Microsoft.AspNetCore.Mvc
 open TeamOpenTasks.TestData
-open TeamOpenTasks.Teams
-open Microsoft.AspNetCore.Mvc
-open Microsoft.AspNetCore.Mvc
+open TeamOpenTasks.Data.Models
 
 [<Route("api/[controller]")>]
 [<ApiController>]
@@ -22,7 +17,7 @@ type TeamsController () =
 
     [<HttpGet("{id}")>]
     member this.Get(id: Guid) =
-        let value = Teams.find id
+        let value = Teams.tryFind id
         match value with
         | Some team -> OkObjectResult(team) :> ObjectResult
         | None -> NotFoundObjectResult((*"none"*)) :> ObjectResult
