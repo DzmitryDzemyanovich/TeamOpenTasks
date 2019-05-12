@@ -6,8 +6,8 @@
   <ItemGroup>
     <Compile Include="Tasks.fs" />
     <Compile Include="Teams.fs" />
-    <Compile Include="Users.fs" />
     <Compile Include="Helpers.fs" />
+    <Compile Include="Users.fs" />
     <Compile Include="TestData.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>

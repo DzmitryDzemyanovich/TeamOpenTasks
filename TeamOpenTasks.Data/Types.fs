@@ -7,7 +7,7 @@ module Types =
     type Role =
         | Admin = 1
         | ScrumMaster = 2
-        | TeamMember = 3
+        | TeamMember = 3     
 
     type TaskId = TaskId of Guid
     type TaskTitle = TaskTitle of string
@@ -17,4 +17,7 @@ module Types =
     type TeamTitle = string
 
     type UserId = Guid
-    type UserName = string
+    type UserName = string   
+
+    type TeamMembership = 
+        | TeamMembership of TeamId *  Role

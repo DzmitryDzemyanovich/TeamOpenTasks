@@ -5,6 +5,7 @@ open System
 
 module Models =
 
+    [<CLIMutable>]
     type Task = {
         Id: TaskId
         Title: TaskTitle
@@ -13,6 +14,7 @@ module Models =
         IsDone: bool
         }
 
+    [<CLIMutable>]
     type TaskAssignment = {
         TaskId: TaskId
         UserId: UserId
@@ -21,6 +23,7 @@ module Models =
         RespawnOnExpiration: bool
         }
 
+    [<CLIMutable>]
     type Team = {
         Id: TeamId
         Title: TeamTitle
@@ -30,11 +33,7 @@ module Models =
         Tasks: Task list
         }
 
-    type TeamMembership = { 
-        TeamId: TeamId
-        Role: Role
-        }
-
+    [<CLIMutable>]
     type User = {
         Id: UserId
         Name: UserName

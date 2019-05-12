@@ -95,7 +95,7 @@ module TestData =
 
         let isInRole (t:Team) (r:Role) (u:User) : bool =
             u.TeamsMembership
-            |> List.filter (fun tm -> (tm.TeamId=t.Id) && (tm.Role=r))
+            |> List.filter (fun tm -> (getTeamId tm = t.Id) && (getRole tm = r))
             |> List.length
             |> (=) 1
 
