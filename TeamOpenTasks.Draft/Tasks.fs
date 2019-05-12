@@ -1,19 +1,13 @@
 namespace TeamOpenTasks
 
 open System
-open Types
+open TeamOpenTasks.Data.Types
+open TeamOpenTasks.Data.Models
 
 module Tasks =
-    type Task = {
-        Id: TaskId
-        Title: TaskTitle
-        CreationDate: DateTime
-        Description: TaskDescription
-        IsDone: bool
-        }
 
-    let createTask (t:TaskTitle) (d:TaskDescription) : Task =
-        { Id=Guid.NewGuid(); Title=t; CreationDate=DateTime.Now; Description=d; IsDone=false }
+    let createTask (tid: TaskId) (t:TaskTitle) (d:TaskDescription) : Task =
+        { Id= tid; Title=t; CreationDate=DateTime.Now; Description=d; IsDone=false }
 
     let editTitle (t:TaskTitle) (task:Task) : Task =
         { task with Title = t}
@@ -23,14 +17,7 @@ module Tasks =
 
     let editIsDone (isdone:bool) (task:Task) : Task =
         { task with IsDone = isdone }
-
-    type TaskAssignment = {
-        TaskId: TaskId
-        UserId: UserId
-        AssignedAt: DateTime
-        Expires: DateTime option
-        RespawnOnExpiration: bool
-        }
+/////////////////////////////////////////////////////////////////////////////////////////////
 
     let mutable allTaskAssignments:TaskAssignment list = []
 

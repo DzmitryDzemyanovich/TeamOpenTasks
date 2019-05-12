@@ -1,18 +1,10 @@
 namespace TeamOpenTasks
 
 open System
-open Tasks
-open Types
+open TeamOpenTasks.Data.Types
+open TeamOpenTasks.Data.Models
 
 module Teams =
-    type Team = {
-        Id: TeamId
-        Title: TeamTitle
-        SprintZeroStartDate: DateTime
-        SprintStart: DayOfWeek
-        SprintLength: int
-        Tasks: Task list
-        }
 
     let private globalTeam: Team = {
         Id = Guid.NewGuid()
