@@ -21,53 +21,61 @@ module TestData =
                 |> List.tryFind (fun t -> t.Id = id)
             result
 
-        let addTeam  (title: TeamTitle) (startDay: DayOfWeek) (startDate: DateTime) (sprintLength: int) :Team =
+        let addTeam (title: TeamTitle) (startDay: DayOfWeek) (startDate: DateTime) (sprintLength: int) :Team =
             let team = Teams.createTeam title startDay startDate sprintLength
             allTeams <- team::allTeams
             team
+
+        let updateTeam (t:Team) : Team =
+            match tryFind t.Id with
+            | None -> failwith "Id not found"
+            | Some team -> Teams.changeTeam team t
+
+        let removeTeam (tid:TeamId) : unit =
+            allTeams <- List.filter(fun t -> t.Id <> tid) allTeams
 
     module Users =
 //#region Test Users
         let admin: User = {
             Id = Guid.NewGuid()
             Name = "Test Admin"
-            TeamsMembership = [createAdmin Teams.adminTeam.Id]
+            TeamsMembership = [createAdmin Teams.adminTeam]
             }
 
         let sm1: User = {
             Id = Guid.NewGuid()
             Name = "SM team 1"
-            TeamsMembership = [createSM Teams.team1.Id]
+            TeamsMembership = [createSM Teams.team1]
             }
 
         let sm2: User = {
             Id = Guid.NewGuid()
             Name = "SM team 2"
-            TeamsMembership = [createSM Teams.team2.Id]
+            TeamsMembership = [createSM Teams.team2]
             }
 
         let member11: User = {
             Id = Guid.NewGuid()
             Name = "Member 1 team 1"
-            TeamsMembership = [createMember Teams.team1.Id]
+            TeamsMembership = [createMember Teams.team1]
             }
 
         let member12: User = {
             Id = Guid.NewGuid()
             Name = "Member 2 team 1"
-            TeamsMembership = [createMember Teams.team1.Id]
+            TeamsMembership = [createMember Teams.team1]
             }
 
         let member21: User = {
             Id = Guid.NewGuid()
             Name = "Member 1 team 2"
-            TeamsMembership = [createMember Teams.team2.Id]
+            TeamsMembership = [createMember Teams.team2]
             }
 
         let member22: User = {
             Id = Guid.NewGuid()
             Name = "Member 2 team 2"
-            TeamsMembership = [createMember Teams.team2.Id]
+            TeamsMembership = [createMember Teams.team2]
             }
 
         let na1: User = {

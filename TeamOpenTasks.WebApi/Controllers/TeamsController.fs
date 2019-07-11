@@ -28,8 +28,9 @@ type TeamsController () =
         OkObjectResult(createdTeam) :> ObjectResult
 
     [<HttpPut("{id}")>]
-    member this.Put(id:int, [<FromBody>] value:string ) =
-        ()
+    member this.Put(id:int, [<FromBody>] team:Team) =
+        let updatedTeam = Teams.updateTeam team
+        OkObjectResult(updatedTeam) :> ObjectResult
 
     [<HttpDelete("{id}")>]
     member this.Delete(id:int) =
