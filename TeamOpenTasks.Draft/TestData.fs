@@ -21,10 +21,18 @@ module TestData =
                 |> List.tryFind (fun t -> t.Id = id)
             result
 
-        let addTeam  (title: TeamTitle) (startDay: DayOfWeek) (startDate: DateTime) (sprintLength: int) :Team =
+        let addTeam (title: TeamTitle) (startDay: DayOfWeek) (startDate: DateTime) (sprintLength: int) :Team =
             let team = Teams.createTeam title startDay startDate sprintLength
             allTeams <- team::allTeams
             team
+
+        let updateTeam (t:Team) : Team =
+            match tryFind t.Id with
+            | None -> failwith "Id not found"
+            | Some team -> Teams.changeTeam team t
+
+        let removeTeam (tid:TeamId) : unit =
+            allTeams <- List.filter(fun t -> t.Id <> tid) allTeams
 
     module Users =
 //#region Test Users
