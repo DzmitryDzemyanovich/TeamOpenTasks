@@ -31,43 +31,43 @@ module TestData =
         let admin: User = {
             Id = Guid.NewGuid()
             Name = "Test Admin"
-            TeamsMembership = [createAdmin Teams.adminTeam]
+            TeamsMembership = [createAdmin Teams.adminTeam.Id]
             }
 
         let sm1: User = {
             Id = Guid.NewGuid()
             Name = "SM team 1"
-            TeamsMembership = [createSM Teams.team1]
+            TeamsMembership = [createSM Teams.team1.Id]
             }
 
         let sm2: User = {
             Id = Guid.NewGuid()
             Name = "SM team 2"
-            TeamsMembership = [createSM Teams.team2]
+            TeamsMembership = [createSM Teams.team2.Id]
             }
 
         let member11: User = {
             Id = Guid.NewGuid()
             Name = "Member 1 team 1"
-            TeamsMembership = [createMember Teams.team1]
+            TeamsMembership = [createMember Teams.team1.Id]
             }
 
         let member12: User = {
             Id = Guid.NewGuid()
             Name = "Member 2 team 1"
-            TeamsMembership = [createMember Teams.team1]
+            TeamsMembership = [createMember Teams.team1.Id]
             }
 
         let member21: User = {
             Id = Guid.NewGuid()
             Name = "Member 1 team 2"
-            TeamsMembership = [createMember Teams.team2]
+            TeamsMembership = [createMember Teams.team2.Id]
             }
 
         let member22: User = {
             Id = Guid.NewGuid()
             Name = "Member 2 team 2"
-            TeamsMembership = [createMember Teams.team2]
+            TeamsMembership = [createMember Teams.team2.Id]
             }
 
         let na1: User = {

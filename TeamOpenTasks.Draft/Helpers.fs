@@ -13,14 +13,14 @@ module Helpers =
         match tm with
         | TeamMembership(_, r) -> r
 
-    let createTeamRole (t:Team) (r:Role) : TeamMembership =
-        TeamMembership(t.Id, r)
+    let createTeamRole (tid) (r) : TeamMembership =
+        TeamMembership(tid, r)
 
-    let createAdmin  (t:Team) : TeamMembership =
-        createTeamRole t Role.Admin
+    let createAdmin  (tid) : TeamMembership =
+        createTeamRole tid Role.Admin
 
-    let createSM  (t:Team) : TeamMembership =
-        createTeamRole t Role.ScrumMaster
+    let createSM  (tid) : TeamMembership =
+        createTeamRole tid Role.ScrumMaster
 
-    let createMember  (t:Team) : TeamMembership =
-        createTeamRole t Role.TeamMember
+    let createMember  (tid) : TeamMembership =
+        createTeamRole tid Role.TeamMember
