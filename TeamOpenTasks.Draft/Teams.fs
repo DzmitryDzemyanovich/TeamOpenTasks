@@ -29,6 +29,13 @@ module Teams =
     let changeTeamSprintLength (l:int) (team:Team): Team =
         {team with SprintLength=l}
 
+    let changeTeam (t:Team) (nt:Team) : Team =
+        t
+        |> changeTeamTitle nt.Title
+        |> changeTeamSprintStart nt.SprintStart
+        |> changeTeamInitialDate nt.SprintZeroStartDate
+        |> changeTeamSprintLength nt.SprintLength
+
     let createTeam (title: TeamTitle) (startDay: DayOfWeek) (startDate: DateTime) (sprintLength: int) : Team =
         createTeamWithTitle title
         |> changeTeamSprintStart startDay
