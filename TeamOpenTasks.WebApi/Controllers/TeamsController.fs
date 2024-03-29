@@ -1,19 +1,22 @@
-﻿namespace TeamOpenTasks.WebApi.Controllers
+﻿namespace WebApplicationFSharp.Controllers
 
 open System
 open Microsoft.AspNetCore.Mvc
-open TeamOpenTasks.TestData
-open TeamOpenTasks.Data.Models
+open Microsoft.Extensions.Logging
 
-[<Route("api/[controller]")>]
+
+open TeamOpenTasks.Infrastructure.Data.Models
+open TeamOpenTasks.Draft.TestData
+
 [<ApiController>]
-type TeamsController () =
+[<Route("api/[controller]")>]
+type TeamsController (logger : ILogger<TeamsController>) =
     inherit ControllerBase()
 
     [<HttpGet>]
     member this.Get() =
-        let teams = Teams.allTeams
-        ActionResult<Team[]>(teams |> List.toArray)
+        let teams = Teams.allTeams |> List.toArray
+        ActionResult<Team[]>(teams)
 
     [<HttpGet("{id}")>]
     member this.Get(id: Guid) =

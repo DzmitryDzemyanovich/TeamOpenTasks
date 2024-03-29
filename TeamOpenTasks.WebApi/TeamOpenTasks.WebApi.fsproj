@@ -1,28 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
-    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Controllers/TeamsController.fs" />
-    <Compile Include="Startup.fs" />
+    <None Include="test.http" />
+    <Compile Include="Controllers\TeamsController.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-  </ItemGroup>
+  <ItemGroup />
 
   <ItemGroup>
-    <ProjectReference Include="..\TeamOpenTasks.Data\TeamOpenTasks.Data.fsproj" />
+    <ProjectReference Include="..\TeamOpenTasks.Data\TeamOpenTasks.Infrastructure.Data.fsproj" />
     <ProjectReference Include="..\TeamOpenTasks.Draft\TeamOpenTasks.fsproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Update="FSharp.Core" Version="4.6.2" />
   </ItemGroup>
 
 </Project>
