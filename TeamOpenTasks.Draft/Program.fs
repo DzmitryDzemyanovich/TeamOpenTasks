@@ -1,6 +1,6 @@
-﻿namespace TeamOpenTasks
+﻿namespace TeamOpenTasks.Draft
 
-(*
+
 module Person =
     type T = { FirstName: string; LastName: string } with
 
@@ -14,7 +14,7 @@ module Person =
 
         member this.SortableName =
             this.LastName + ", " + this.FirstName
-*)
+
 
 module Main =
     
@@ -73,7 +73,7 @@ module Main =
 
     [<EntryPoint>]
     let main argv =
-        // let person = Person.create "John" "Doe"
-        // printfn "%s" person.FullName
-        // printfn "%s" person.SortableName
+        let person = Person.create "John" "Doe"
+        printfn "%s" person.FullName
+        printfn "%s" person.SortableName
         0 // return an integer exit code

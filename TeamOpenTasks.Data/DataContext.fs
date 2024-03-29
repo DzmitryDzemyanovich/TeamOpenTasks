@@ -1,4 +1,4 @@
-﻿namespace TeamOpenTasks.Data
+﻿namespace TeamOpenTasks.Infrastructure.Data
 
 open Microsoft.EntityFrameworkCore
 open Models

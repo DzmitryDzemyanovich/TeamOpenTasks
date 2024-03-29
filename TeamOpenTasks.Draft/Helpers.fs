@@ -1,7 +1,7 @@
-namespace TeamOpenTasks
+namespace TeamOpenTasks.Draft
 
-open TeamOpenTasks.Data.Types
-open TeamOpenTasks.Data.Models
+open TeamOpenTasks.Infrastructure.Data.Types
+open TeamOpenTasks.Infrastructure.Data.Models
 
 module Helpers =
 
