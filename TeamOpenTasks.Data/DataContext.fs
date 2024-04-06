@@ -11,7 +11,7 @@ module DataContext =
         override __.OnModelCreating modelBuilder = 
             modelBuilder
                 .Entity<Task>()
-                .HasKey(fun t -> (t.Id) :> obj)
+                .HasKey(fun t -> t.Id :> obj)
             |> ignore
             
             modelBuilder
@@ -21,7 +21,7 @@ module DataContext =
             
             modelBuilder
                 .Entity<Team>()
-                .HasKey(fun t -> (t.Id) :> obj)
+                .HasKey(fun t -> t.Id :> obj)
             |> ignore
             //modelBuilder.Entity<Task>().Property(fun task -> task.Id).ValueGeneratedOnAdd() |> ignore
 
